@@ -1,8 +1,10 @@
 """Essentia Key Extractor - Slim Python wrapper for musical key detection"""
 
-from typing import TypedDict
-import numpy as np
-import numpy.typing as npt
+from typing import TypedDict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import numpy as np
+    import numpy.typing as npt
 
 try:
     from ._keyext import key_extractor, key_extractor_from_file
@@ -21,7 +23,7 @@ class KeyResult(TypedDict):
 
 
 def extract_key(
-    audio: npt.NDArray[np.float32],
+    audio: "npt.NDArray[np.float32]",
     sample_rate: float = 44100.0
 ) -> KeyResult:
     """
