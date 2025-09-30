@@ -1,0 +1,11 @@
+build/
+*.egg-info/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+*.so
+.pytest_cache/
+vendor/
+*.wav
+*.mp3
