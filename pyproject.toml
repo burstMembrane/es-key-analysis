@@ -1,6 +1,6 @@
 [project]
 name = "essentia-key-extractor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Slim Python wrapper exposing Essentia KeyExtractor algorithm"
 readme = "README.md"
 requires-python = ">=3.12"
