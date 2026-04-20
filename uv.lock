@@ -92,6 +92,12 @@ dependencies = [
     { name = "soxr" },
 ]
 
+[package.optional-dependencies]
+cli = [
+    { name = "soundfile" },
+    { name = "soxr" },
+]
+
 [package.dev-dependencies]
 compare = [
     { name = "essentia" },
@@ -106,8 +112,11 @@ requires-dist = [
     { name = "numpy", specifier = "==1.26.1" },
     { name = "pybind11", specifier = ">=2.12" },
     { name = "soundfile", specifier = ">=0.13.1" },
+    { name = "soundfile", marker = "extra == 'cli'", specifier = ">=0.12" },
     { name = "soxr", specifier = ">=1.0.0" },
+    { name = "soxr", marker = "extra == 'cli'", specifier = ">=0.3.7" },
 ]
+provides-extras = ["cli"]
 
 [package.metadata.requires-dev]
 compare = [{ name = "essentia", specifier = "==2.1b6.dev1177" }]

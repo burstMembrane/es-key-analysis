@@ -16,4 +16,4 @@ test:
 	pytest tests -v
 
 run:
-	uv run rhythm-extractor testdata/drums2.wav --algorithm rhythm2013
+	uv run key-extractor testdata/test_60s.wav 

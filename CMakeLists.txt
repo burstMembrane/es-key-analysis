@@ -8,23 +8,19 @@ project(essentia_key_analysis LANGUAGES C CXX)
 # Check for system Eigen3 first
 find_package(Eigen3 3.3 QUIET)
 
-# Setup Essentia dependency if not already present
-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vendor/essentia/src")
-    message(STATUS "Setting up Essentia dependency...")
-    execute_process(
-        COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/scripts/setup-essentia.sh"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-        RESULT_VARIABLE SETUP_RESULT
+set(ESSENTIA_VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/essentia")
+if(NOT EXISTS "${ESSENTIA_VENDOR_DIR}/src" OR NOT EXISTS "${ESSENTIA_VENDOR_DIR}/VERSION")
+    message(FATAL_ERROR
+        "Missing Essentia source tree at ${ESSENTIA_VENDOR_DIR}.\n"
+        "This project expects vendor/essentia to be checked out as a git submodule.\n"
+        "Run: git submodule update --init --recursive vendor/essentia"
     )
-    if(NOT SETUP_RESULT EQUAL 0)
-        message(FATAL_ERROR "Failed to setup Essentia dependency")
-    endif()
-    
-    # If system Eigen wasn't found, try to find the built one
-    if(NOT Eigen3_FOUND)
-        set(CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vendor/essentia/packaging/debian_3rdparty" ${CMAKE_PREFIX_PATH})
-        find_package(Eigen3 3.3 QUIET)
-    endif()
+endif()
+
+# If system Eigen wasn't found, also allow a vendored build under the Essentia tree.
+if(NOT Eigen3_FOUND)
+    set(CMAKE_PREFIX_PATH "${ESSENTIA_VENDOR_DIR}/packaging/debian_3rdparty" ${CMAKE_PREFIX_PATH})
+    find_package(Eigen3 3.3 QUIET)
 endif()
 
 # Configure Eigen3 include paths

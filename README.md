@@ -5,6 +5,7 @@ Slim Python wrapper exposing Essentia's KeyExtractor algorithm for musical key d
 ## Installation
 
 ```bash
+git submodule update --init --recursive vendor/essentia
 pip install -e .
 ```
 
@@ -46,7 +47,14 @@ Returns a dictionary with:
 - CMake 3.20+
 - FFmpeg/libav libraries
 - libsamplerate
-- Eigen3 (automatically downloaded if not found)
+- `vendor/essentia` checked out as a git submodule
+- Eigen3, either from the system or from `vendor/essentia/packaging/debian_3rdparty`
+
+If you cloned the repository without submodules, initialize Essentia before building:
+
+```bash
+git submodule update --init --recursive vendor/essentia
+```
 
 ## Architecture
 

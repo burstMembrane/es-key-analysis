@@ -23,14 +23,23 @@ build-backend = "scikit_build_core.build"
 dev = ["pyinstrument>=5.1.1", "pytest>=8.4.2"]
 compare = ["essentia==2.1b6.dev1177"]
 
+
+[project.optional-dependencies]
+cli = ["soxr>=0.3.7", "soundfile>=0.12"]
+
+[project.scripts]
+key-extractor = "essentia_key_extractor.cli:main"
+
+
 [tool.scikit-build]
 cmake.verbose = true
 # Run setup script before build
 build-dir = "build"
 # Include only the vendor files that are actually used by CMakeLists.txt
 sdist.include = [
+    ".gitmodules",
     "src/**/*",
     "CMakeLists.txt",
     "version.h.in",
-    "scripts/setup-essentia.sh",
+    "vendor/essentia/**/*",
 ]
