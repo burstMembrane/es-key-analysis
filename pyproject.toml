@@ -32,8 +32,7 @@ key-extractor = "essentia_key_extractor.cli:main"
 
 
 [tool.scikit-build]
-cmake.verbose = true
-# Run setup script before build
+build.verbose = true
 build-dir = "build"
 # Include only the vendor files that are actually used by CMakeLists.txt
 sdist.include = [
